@@ -7,10 +7,11 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
-  "assistant": {
+  "agent": {
+    "default_profile": "ask",
     "default_model": {
-      "provider": "zed.dev",
-      "model": "claude-3-7-sonnet-latest"
+      "provider": "google",
+      "model": "gemini-2.5-flash-preview-04-17"
     },
     "version": "2"
   },
@@ -20,7 +21,7 @@
       "proxy": null,
       "proxy_no_verify": null
     },
-    "enabled_in_assistant": false
+    "enabled_in_text_threads": false
   },
   "features": {
     "edit_prediction_provider": "zed"
@@ -30,32 +31,44 @@
   "buffer_font_size": 18,
   "theme": {
     "mode": "system",
-    "light": "One Light",
+    "light": "One Dark",
     "dark": "One Dark"
   },
   "languages": {
     "Ruby": {
-      "language_servers": ["ruby-lsp", "rubocop", "!solargraph", "..."]
-    },
-    "ERB": {
-      "formatter": [
-        {
-          "external": {
-            "command": "sh",
-            "arguments": [
-              "-c",
-              "f=erblinttemp_$RANDOM$RANDOM.html.erb; cat > $f; erblint -a $f &>/dev/null; cat $f; rm $f;"
-            ]
-          }
-        },
-        {
-          "external": {
-            "command": "htmlbeautifier",
-            "arguments": []
-          }
-        }
-      ],
-      "format_on_save": "on"
+      "language_servers": ["ruby-lsp", "!solargraph", "..."]
     }
+  },
+  "lsp": {
+    "ruby-lsp": {
+      "initialization_options": {
+        "formatter": "standard",
+        "linters": ["standard"],
+        "enabledFeatures": {
+          // This disables diagnostics
+          "diagnostics": false
+        }
+      }
+    }
+  },
+  "ERB": {
+    "formatter": [
+      {
+        "external": {
+          "command": "sh",
+          "arguments": [
+            "-c",
+            "f=erblinttemp_$RANDOM$RANDOM.html.erb; cat > $f; erblint -a $f &>/dev/null; cat $f; rm $f;"
+          ]
+        }
+      },
+      {
+        "external": {
+          "command": "htmlbeautifier",
+          "arguments": []
+        }
+      }
+    ],
+    "format_on_save": "on"
   }
 }
